@@ -77,10 +77,10 @@ def get_cars(request):
 # Update `get_dealerships` to render list of dealerships, all by default, or filter by state
 def get_dealerships(request, state="All"):
     if state == "All":
-    endpoint = "/fetchDealers"
+        endpoint = "/fetchDealers"
     
     else:
-    endpoint = f"/fetchDealers/{state}"
+        endpoint = f"/fetchDealers/{state}"
 
     dealerships = get_request(endpoint)
     return JsonResponse({"status": 200, "dealers": dealerships})
