@@ -23,7 +23,7 @@ def login_user(request):
 
     user = authenticate(username=username, password=password)
     data = {"userName": username}
-    
+
     if user is not None:
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
@@ -52,8 +52,10 @@ def registration(request):
         User.objects.get(username=username)
         data = {"userName": username, "error": "Already Registered"}
     except User.DoesNotExist:
-        user = User.objects.create_user(username=username, first_name=first_name, 
-                                        last_name=last_name, password=password, email=email)
+        user = User.objects.create_user(username=username, 
+                                        first_name=first_name, 
+                                        last_name=last_name, password=password, 
+                                        email=email)
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
 
@@ -111,7 +113,8 @@ def add_review(request):
         try:
             post_review(data)
             return JsonResponse({"status": 200})
-        except:
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+        except Exception as e:
+            return JsonResponse({"status": 401, 
+                                 "message": "Error in posting review"})
 
     return JsonResponse({"status": 403, "message": "Unauthorized"})
