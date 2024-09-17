@@ -1,10 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, login, authenticate
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib import messages
-from datetime import datetime
 import logging
 import json
 from .models import CarMake, CarModel
@@ -69,7 +66,8 @@ def get_cars(request):
         initiate()
 
     car_models = CarModel.objects.select_related('car_make')
-    cars = [{"CarModel": car_model.name, "CarMake": car_model.car_make.name} for car_model in car_models]
+    cars = [{"CarModel": car_model.name, 
+             "CarMake": car_model.car_make.name} for car_model in car_models]
 
     return JsonResponse({"CarModels": cars})
 
