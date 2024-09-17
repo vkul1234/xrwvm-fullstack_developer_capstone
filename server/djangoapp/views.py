@@ -52,13 +52,10 @@ def registration(request):
         User.objects.get(username=username)
         data = {"userName": username, "error": "Already Registered"}
     except User.DoesNotExist:
-        user = User.objects.create_user(
-            username=username, 
-            first_name=first_name, 
-            last_name=last_name, 
-            password=password, 
-            email=email
-        )
+        user = User.objects.create_user(username=username, 
+                                        first_name=first_name, 
+                                        last_name=last_name, password=password, 
+                                        email=email)
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
 
@@ -79,8 +76,12 @@ def get_cars(request):
 
 # Update `get_dealerships` to render list of dealerships, all by default, or filter by state
 def get_dealerships(request, state="All"):
+    if state == "All":
+    endpoint = "/fetchDealers"
     
-    endpoint = "/fetchDealers" if state == "All" else f"/fetchDealers/{state}"
+    else:
+    endpoint = f"/fetchDealers/{state}"
+
     dealerships = get_request(endpoint)
     return JsonResponse({"status": 200, "dealers": dealerships})
 
