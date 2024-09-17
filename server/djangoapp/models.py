@@ -1,4 +1,4 @@
-also change this # Uncomment the following imports before adding the Model code
+# Uncomment the following imports before adding the Model code
 
 from django.db import models
 from django.utils.timezone import now
