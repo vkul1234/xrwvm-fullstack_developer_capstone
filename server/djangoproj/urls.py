@@ -20,8 +20,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-        path('about/', TemplateView.as_view(template_name="About.html")),
-            path('contact/', TemplateView.as_view(template_name="Contact.html")),
+    path('about/', TemplateView.as_view(template_name="About.html")),
+    path('contact/', TemplateView.as_view(template_name="Contact.html")),
     path('admin/', admin.site.urls),
     path('djangoapp/', include('djangoapp.urls')),
     path('login/', TemplateView.as_view(template_name="index.html")),
